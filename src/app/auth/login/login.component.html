@@ -1,0 +1,10 @@
+<div>
+    <form>
+        <input type="text" [(ngModel)]="user.username" name="username" placeholder="username">
+        <input type="password" [(ngModel)]="user.password" name="password" placeholder="password">
+        <button (click)="loginUser(user)">
+            Login
+        </button>
+    </form>
+    <p>Click <a routerLink="/signup" routerLinkActive="active">here</a> to create an account</p>
+</div>
