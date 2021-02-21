@@ -8,3 +8,6 @@
     </form>
     <p>Click <a routerLink="/signup" routerLinkActive="active">here</a> to create an account</p>
 </div>
+<div *ngIf="error.message" class="alert alert-danger" role="alert">
+    {{ error.message }}
+</div>

@@ -18,13 +18,20 @@ export class SignupComponent implements OnInit {
     repassword:"",
     photo:"",
   };
+  error = {
+    message: ""
+  };
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private localStorage: LocalStorage) { }
+    private localStorage: LocalStorage
+  ) { }
 
   ngOnInit(): void {
+    // if(this.localStorage.getItem("user")){
+
+    // }
   }
 
   onFileSelect(files: FileList) {
@@ -44,6 +51,16 @@ export class SignupComponent implements OnInit {
         this.localStorage.setItem("user", user);
         this.router.navigate(['/dashboard']);
       }
+    }, errorResponse => {
+      this.error = errorResponse.error;
+      // this.userForm.forEach(function(val, key){
+      //     this.userForm.delete(key);
+      // });
+      // const keys = this.userForm.keys();
+      // for (var key of keys) {
+      //   this.userForm.delete(key);
+      // }
+      // this.signUpForm = new FormData();
     });
   }
 

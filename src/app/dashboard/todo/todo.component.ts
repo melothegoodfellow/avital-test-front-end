@@ -18,7 +18,7 @@ export class TodoComponent implements OnInit {
   pageSize: number = 5;
   page: number = 1;
   closeResult: string;
-  // description: string = "";
+  photoUrl = "http://localhost:3000/photos/"
   todo: any = {
     id: "",
     description: "",
@@ -51,25 +51,25 @@ export class TodoComponent implements OnInit {
 
   saveTodo(data){
     this.dashboardService.saveTodo(data).subscribe(response => {
-      console.log(response);
+      this.getTodos();
      });
   }
 
   editTodo(data) {
     this.dashboardService.editTodo(data).subscribe(response => {
-      console.log(response);
+      this.getTodos();
     });
   }
   
   deleteTodo(todoId) {
     this.dashboardService.deleteTodo(todoId).subscribe(response => {
-      console.log(response);
+      this.getTodos();
     });
   }
   
   completeTodo(todoId) {
     this.dashboardService.completeTodo(todoId).subscribe(response => {
-      console.log(response);
+      this.getTodos();
     });
   }
 
@@ -97,7 +97,6 @@ export class TodoComponent implements OnInit {
         });
       }
     }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 

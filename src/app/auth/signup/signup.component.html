@@ -4,11 +4,16 @@
         <input type="password" [(ngModel)]="user.password" placeholder="password" name="password">
         <input type="password" [(ngModel)]="user.repassword" placeholder="re-enter password" name="repassword">
         <input type="file" (change)="onFileSelect($event.target.files)" [(ngModel)]="user.photo" placeholder="photo" name="photo">
-        <button (click)="signUpUser(user)">
+        <button *ngIf="user.password === user.repassword" (click)="signUpUser(user)">
             Sign up
         </button>
     </form>
     <p>Already have an account? Click <a routerLink="/login" routerLinkActive="active">here</a>
-         to view task dashboard</p>
-    
+         to login to view task dashboard</p>
+</div>
+<div *ngIf="error.message" class="alert alert-danger" role="alert">
+    {{ error.message }}
+</div>
+<div *ngIf="user.password !== user.repassword" class="alert alert-danger" role="alert">
+    passwords dont match
 </div>

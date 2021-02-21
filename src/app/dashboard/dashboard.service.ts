@@ -17,32 +17,57 @@ export class DashboardService {
     private http: HttpClient,
     private localStorage: LocalStorage
     ){
+    
+  }
+
+  getTodos(): Observable<any>{
     this.httpHeaders = new HttpHeaders({
       'Content-Type':  "application/json",
       "Authorization": "Bearer "+this.localStorage.getItem("user").token
     });
-  }
-
-  getTodos(): Observable<any>{
     return this.http.get<any>(this.dashboardUrl, {
       headers: this.httpHeaders
     });
   }
 
   deleteTodo(todoId) {
-    return this.http.delete<any>(this.dashboardUrl+"/"+todoId, this.httpHeaders);
+    this.httpHeaders = new HttpHeaders({
+      'Content-Type':  "application/json",
+      "Authorization": "Bearer "+this.localStorage.getItem("user").token
+    });
+    return this.http.delete<any>(this.dashboardUrl+"/"+todoId, {
+      headers: this.httpHeaders
+    });
   }
 
   editTodo(data: any) {
-    return this.http.put<any>(this.dashboardUrl, data, this.httpHeaders);
+    this.httpHeaders = new HttpHeaders({
+      'Content-Type':  "application/json",
+      "Authorization": "Bearer "+this.localStorage.getItem("user").token
+    });
+    return this.http.put<any>(this.dashboardUrl, data, {
+      headers: this.httpHeaders
+    });
   }
   
   completeTodo(todoId) {
-    return this.http.patch<any>(this.dashboardUrl+"/"+todoId, this.httpHeaders);
+    this.httpHeaders = new HttpHeaders({
+      'Content-Type':  "application/json",
+      "Authorization": "Bearer "+this.localStorage.getItem("user").token
+    });
+    return this.http.patch<any>(this.dashboardUrl+"/"+todoId, {}, {
+      headers: this.httpHeaders
+    });
   }
   
   saveTodo(description: string): Observable<any>{
-    return this.http.post<any>(this.dashboardUrl, description, this.httpHeaders);
+    this.httpHeaders = new HttpHeaders({
+      'Content-Type':  "application/json",
+      "Authorization": "Bearer "+this.localStorage.getItem("user").token
+    });
+    return this.http.post<any>(this.dashboardUrl, description, {
+      headers: this.httpHeaders
+    });
   }
 
 }

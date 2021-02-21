@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
     username:"",
     password:""
   };
+  error = {
+    message: ""
+  };
 
   constructor(
       private authService: AuthService,
@@ -32,6 +35,9 @@ export class LoginComponent implements OnInit {
         this.localStorage.setItem("user", user);
         this.router.navigate(['/dashboard']);
       }
+    }, 
+    errorResponse => {
+      this.error = errorResponse.error;
     });
   }
 }
